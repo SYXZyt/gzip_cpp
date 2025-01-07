@@ -23,7 +23,9 @@ include_directories(
 file(GLOB GZIP_SRCS "src/*.cc")
 add_library(gzip_cpp ${GZIP_SRCS})
 
-target_link_libraries(gzip_cpp ${ZLIB_LIBRARIES} pthread)
+if (NOT WIN32)
+	target_link_libraries(gzip_cpp ${ZLIB_LIBRARIES} pthread)
+endif()
 
 file(GLOB GZIP_TEST_SRCS "test/*.cc")
 file(GLOB GOOGLE_TEST_SRCS
